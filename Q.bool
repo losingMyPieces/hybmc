@@ -1,0 +1,1 @@
+forall q.(F(aaaaa_q)) => ((X((~(X(aa_q))) & (X((aaaaa_q) U (G(aaaa_q)))))) W (((aaa_q) R ((G((aa_q) U (aaaaa_q))) U (aaa_q))) | (X(((~(aaa_q)) <=> (~(X((aaa_q) <=> ((a_q) & (aaa_q)))))) => (G((aaa_q) | (F(a_q)))))))) 

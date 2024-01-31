@@ -1,0 +1,217 @@
+
+** Conflict (shift/reduce) in state 58.
+** Token involved: EOF
+** This state is reached from main after reading:
+
+NOT formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+(?)
+
+** In state 58, looking ahead at EOF, reducing production
+** formula_expr -> NOT formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr EOF // lookahead token appears
+NOT formula_expr . 
+
+** In state 58, looking ahead at EOF, shifting is permitted
+** because of the following sub-derivation:
+
+NOT main 
+    formula_expr . EOF 
+
+** Conflict (shift/reduce) in state 56.
+** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
+** The following explanations concentrate on token UNTIL.
+** This state is reached from main after reading:
+
+EXISTS ID formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+(?)
+
+** In state 56, looking ahead at UNTIL, shifting is permitted
+** because of the following sub-derivation:
+
+EXISTS ID formula_expr 
+          formula_expr . UNTIL formula_expr 
+
+** In state 56, looking ahead at UNTIL, reducing production
+** formula_expr -> EXISTS ID formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr EOF 
+formula_expr UNTIL formula_expr // lookahead token appears
+EXISTS ID formula_expr . 
+
+** Conflict (shift/reduce) in state 53.
+** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
+** The following explanations concentrate on token UNTIL.
+** This state is reached from main after reading:
+
+FORALL ID formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+(?)
+
+** In state 53, looking ahead at UNTIL, shifting is permitted
+** because of the following sub-derivation:
+
+FORALL ID formula_expr 
+          formula_expr . UNTIL formula_expr 
+
+** In state 53, looking ahead at UNTIL, reducing production
+** formula_expr -> FORALL ID formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr EOF 
+formula_expr UNTIL formula_expr // lookahead token appears
+FORALL ID formula_expr . 
+
+** Conflict (shift/reduce) in state 43.
+** Token involved: EOF
+** This state is reached from main after reading:
+
+OP NOT formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+OP main CL 
+   (?)
+
+** In state 43, looking ahead at EOF, reducing production
+** formula_expr -> NOT formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr EOF // lookahead token appears
+NOT formula_expr . 
+
+** In state 43, looking ahead at EOF, shifting is permitted
+** because of the following sub-derivation:
+
+NOT main 
+    formula_expr . EOF 
+
+** Conflict (shift/reduce) in state 41.
+** Tokens involved: UNTIL RELEASE OR IMPL EQUIV CL AND
+** The following explanations concentrate on token UNTIL.
+** This state is reached from main after reading:
+
+OP EXISTS ID formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+OP main CL 
+   (?)
+
+** In state 41, looking ahead at UNTIL, shifting is permitted
+** because of the following sub-derivation:
+
+EXISTS ID formula_expr 
+          formula_expr . UNTIL formula_expr 
+
+** In state 41, looking ahead at UNTIL, reducing production
+** formula_expr -> EXISTS ID formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr EOF 
+formula_expr UNTIL formula_expr // lookahead token appears
+EXISTS ID formula_expr . 
+
+** Conflict (shift/reduce) in state 38.
+** Tokens involved: UNTIL RELEASE OR IMPL EQUIV CL AND
+** The following explanations concentrate on token UNTIL.
+** This state is reached from main after reading:
+
+OP FORALL ID formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+OP main CL 
+   (?)
+
+** In state 38, looking ahead at UNTIL, shifting is permitted
+** because of the following sub-derivation:
+
+FORALL ID formula_expr 
+          formula_expr . UNTIL formula_expr 
+
+** In state 38, looking ahead at UNTIL, reducing production
+** formula_expr -> FORALL ID formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr EOF 
+formula_expr UNTIL formula_expr // lookahead token appears
+FORALL ID formula_expr . 
+
+** Conflict (shift/reduce) in state 30.
+** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
+** The following explanations concentrate on token UNTIL.
+** This state is reached from main after reading:
+
+NEXT FORALL ID formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+formula_expr EOF 
+NEXT formula_expr 
+     (?)
+
+** In state 30, looking ahead at UNTIL, shifting is permitted
+** because of the following sub-derivation:
+
+FORALL ID formula_expr 
+          formula_expr . UNTIL formula_expr 
+
+** In state 30, looking ahead at UNTIL, reducing production
+** formula_expr -> FORALL ID formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr UNTIL formula_expr // lookahead token appears
+FORALL ID formula_expr . 
+
+** Conflict (shift/reduce) in state 17.
+** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
+** The following explanations concentrate on token UNTIL.
+** This state is reached from main after reading:
+
+NEXT EXISTS ID formula_expr
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+formula_expr EOF 
+NEXT formula_expr 
+     (?)
+
+** In state 17, looking ahead at UNTIL, shifting is permitted
+** because of the following sub-derivation:
+
+EXISTS ID formula_expr 
+          formula_expr . UNTIL formula_expr 
+
+** In state 17, looking ahead at UNTIL, reducing production
+** formula_expr -> EXISTS ID formula_expr
+** is permitted because of the following sub-derivation:
+
+formula_expr UNTIL formula_expr // lookahead token appears
+EXISTS ID formula_expr . 

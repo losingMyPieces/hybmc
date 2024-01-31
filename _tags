@@ -1,0 +1,5 @@
+# Directories
+true: -traverse
+
+# Options
+#<./**/*.ml>: warnings
