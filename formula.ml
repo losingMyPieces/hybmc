@@ -1,5 +1,5 @@
 module E = Expression
-
+ type variable = string
 type literal =
 | Atom of variable
 | NotAtom of variable
@@ -11,10 +11,10 @@ type formula =
   | Exists of string * formula
   | Forall of string * formula
   | Next of formula
-  | Finally of formula
-  | Globally of formula
-  | Until of formula * formula
-  | Release of formula * formula
+  | Finally of E.expression
+  | Globally of E.expression
+  | Until of E.expression * E.expression
+  | Release of E.expression * E.expression
   | Not of formula
   | Or of formula * formula
   | And of formula * formula

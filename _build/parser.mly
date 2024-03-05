@@ -36,23 +36,38 @@
 %start main
 %type <Formula.formula> main
 %type <Formula.formula> formula_expr
+%type <Expression.expression> expression
 
 %%
+
+expression:
+    | OP expression CL           { $2 }
+    | TRUE                    { Expression.True }
+    | FALSE                   { Expression.False }
+    | NOT expression             { let phi = $2 in
+                                match phi with
+                                 | Expression.Literal(Expression.Atom(name)) -> Expression.Literal(Expression.NotAtom(name))
+                                 | _ -> Expression.Not(phi) }
+    | expression AND expression         { Expression.And ($1,$3) }
+    | expression OR expression          { Expression.Or ($1,$3) }
+    | expression IMPL expression        { Expression.Impl ($1,$3) }
+    | expression EQUIV expression       { Expression.Equiv ($1,$3) }
+    | ID                      { Expression.Literal(Atom(get_name($1)))}
 
 formula_expr:
     | TRUE                                      { Formula.True }
     | FALSE                                     { Formula.False }
-    | ID                      { let p = Expression.Literal(Expression.Atom(get_name($1))) in Formula.General (p); }
+    | ID                                        { Formula.Literal(Formula.Atom(get_name($1))) }
     | NOT f=formula_expr                        { Formula.Not (f) }
     | f=formula_expr AND g=formula_expr         { Formula.And (f,g) }
     | f=formula_expr OR g=formula_expr          { Formula.Or (f,g) }
     | f=formula_expr IMPL g=formula_expr        { Formula.Impl (f,g) }
     | f=formula_expr EQUIV g=formula_expr       { Formula.Equiv (f,g) }
     | NEXT f=formula_expr                       { Formula.Next (f) }
-    | f=formula_expr UNTIL g=formula_expr       { Formula.Until (f,g) }
-    | f=formula_expr RELEASE g=formula_expr     { Formula.Release (f,g) }
-    | EVENTUALLY f=formula_expr                 { Formula.Finally (f) }
-    | GLOBALLY f=formula_expr                   { Formula.Globally (f) }
+    | f=expression UNTIL g=expression       { Formula.Until (f,g) }
+    | f=expression RELEASE g=expression     { Formula.Release (f,g) }
+    | EVENTUALLY f=expression                 { Formula.Finally (f) }
+    | GLOBALLY f=expression                   { Formula.Globally (f) }
     | OP f=formula_expr CL                      { f }
     | EXISTS s=ID f=formula_expr   { Formula.Exists (get_name(s),f) }
     | FORALL s=ID f=formula_expr   { Formula.Forall (get_name(s),f) }

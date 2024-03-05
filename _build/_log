@@ -1,16 +1,26 @@
 ### Starting build.
 # Target: genqbf.ml.depends, tags: { package(str), package(unix), extension:ml, file:genqbf.ml, ocaml, ocamldep, quiet }
-ocamlfind ocamldep -package str -package unix -modules genqbf.ml > genqbf.ml.depends
+ocamlfind ocamldep -package str -package unix -modules genqbf.ml > genqbf.ml.depends # cached
+# Target: Circuit.ml.depends, tags: { package(str), package(unix), extension:ml, file:Circuit.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -package str -package unix -modules Circuit.ml > Circuit.ml.depends
+# Target: Expression.ml.depends, tags: { package(str), package(unix), extension:ml, file:Expression.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -package str -package unix -modules Expression.ml > Expression.ml.depends # cached
+# Target: Expression.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:Expression.cmo, file:Expression.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -package str -package unix -o Expression.cmo Expression.ml # cached
+# Target: SymbolTable.ml.depends, tags: { package(str), package(unix), extension:ml, file:SymbolTable.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -package str -package unix -modules SymbolTable.ml > SymbolTable.ml.depends # cached
+# Target: SymbolTable.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:SymbolTable.cmo, file:SymbolTable.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -package str -package unix -o SymbolTable.cmo SymbolTable.ml # cached
+# Target: Debug.ml.depends, tags: { package(str), package(unix), extension:ml, file:Debug.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -package str -package unix -modules Debug.ml > Debug.ml.depends # cached
+# Target: Debug.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:Debug.cmo, file:Debug.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -package str -package unix -o Debug.cmo Debug.ml # cached
 # Target: ExprLexer.mll, tags: { package(str), package(unix), extension:mll, file:ExprLexer.mll, lexer, ocaml, ocamllex, quiet }
 /home/zyming/.opam/default/bin/ocamllex.opt -q ExprLexer.mll # cached
 # Target: ExprLexer.ml.depends, tags: { package(str), package(unix), extension:ml, file:ExprLexer.ml, ocaml, ocamldep, quiet }
 ocamlfind ocamldep -package str -package unix -modules ExprLexer.ml > ExprLexer.ml.depends # cached
 # Target: ExprParser.mly.depends, tags: { package(str), package(unix), extension:mly, file:ExprParser.mly, infer, menhir_ocamldep, ocaml, ocamldep, quiet }
 menhir --explain --raw-depend --ocamldep 'ocamlfind ocamldep -modules' ExprParser.mly > ExprParser.mly.depends # cached
-# Target: Expression.ml.depends, tags: { package(str), package(unix), extension:ml, file:Expression.ml, ocaml, ocamldep, quiet }
-ocamlfind ocamldep -package str -package unix -modules Expression.ml > Expression.ml.depends # cached
-# Target: Expression.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:Expression.cmo, file:Expression.ml, implem, ocaml, quiet }
-ocamlfind ocamlc -c -package str -package unix -o Expression.cmo Expression.ml # cached
 # Target: global.ml.depends, tags: { package(str), package(unix), extension:ml, file:global.ml, ocaml, ocamldep, quiet }
 ocamlfind ocamldep -package str -package unix -modules global.ml > global.ml.depends # cached
 # Target: global.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:global.cmo, file:global.ml, implem, ocaml, quiet }
@@ -49,17 +59,53 @@ ocamlfind ocamlc -c -package str -package unix -o lexer.cmo lexer.ml # cached
 ocamlfind ocamldep -package str -package unix -modules Parse.ml > Parse.ml.depends # cached
 # Target: Parse.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:Parse.cmo, file:Parse.ml, implem, ocaml, quiet }
 ocamlfind ocamlc -c -package str -package unix -o Parse.cmo Parse.ml # cached
+# Target: Circuit.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:Circuit.cmo, file:Circuit.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -package str -package unix -o Circuit.cmo Circuit.ml
++ ocamlfind ocamlc -c -package str -package unix -o Circuit.cmo Circuit.ml
+File "Circuit.ml", lines 51-64, characters 4-69:
+51 | ....match e with
+52 |       True_gen   -> True
+53 |     | False_gen  -> False
+54 |     | Literal_gen(l)   -> convert_literal l
+55 |     | Not_gen(_)       -> print_endline (expression_to_str e) ; raise(ErrorInNNF)
+...
+61 |     | Equiv_gen(x,y)   -> let (cx,cy)=(convert x, convert y) in Ite(get_name(),cx,cy,cy)
+62 |     | Equiv_path(x,y,z)-> let r=if compare_lists x y then True else False in let cz=convert z in And(get_name(),r,cz)
+63 |     | Forall_gen(x,y)  -> let cy=convert y in Forall(get_name(),x,cy)
+64 |     | Exists_gen(x,y)  -> let cy=convert y in Exists(get_name(),x,cy)
+Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+General _
+
+File "Circuit.ml", line 103, characters 6-16:
+103 |     | And(t,x,y)    -> addtag t ; tag_c x ; tag_c y
+            ^^^^^^^^^^
+Warning 11 [redundant-case]: this match case is unused.
+
+File "Circuit.ml", lines 149-173, characters 4-94:
+149 | ....match c with
+150 |       True  -> "and()\n"
+151 |     | False -> "or()\n"
+152 |     | Literal(s,_) -> ""
+153 |     | Let(s,cx,cy) -> sprintf "%s\n%s" (to_str cx) (to_str cy)
+...
+170 |       sx ^ sy ^ sprintf "%s = xor(%s,%s)\n" s (get_name cx) (get_name cy)
+171 |     | Ite(s,cx,cy,cz)  ->
+172 |       let (sx,sy,sz)=(to_str cx,to_str cy,to_str cz) in
+173 |       sx ^ sy ^ sz ^ sprintf "%s = ite(%s,%s,%s)\n" s (get_name cx) (get_name cy)(get_name cz)
+Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(Exists (_, _, _)|Forall (_, _, _))
 # Target: genqbf.cmo, tags: { package(str), package(unix), byte, compile, extension:cmo, extension:ml, file:genqbf.cmo, file:genqbf.ml, implem, ocaml, quiet }
-ocamlfind ocamlc -c -package str -package unix -o genqbf.cmo genqbf.ml
-+ ocamlfind ocamlc -c -package str -package unix -o genqbf.cmo genqbf.ml
-File "genqbf.ml", line 169, characters 8-12:
-169 |     let desc = parse_problem_desc () in
-              ^^^^
-Warning 26 [unused-var]: unused variable desc.
-# Target: ExprParser.ml.depends, tags: { package(str), package(unix), extension:ml, file:ExprParser.ml, ocaml, ocamldep, quiet }
-ocamlfind ocamldep -package str -package unix -modules ExprParser.ml > ExprParser.ml.depends # cached
+ocamlfind ocamlc -c -package str -package unix -o genqbf.cmo genqbf.ml # cached
 # Target: Expression.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:Expression.cmx, file:Expression.ml, implem, native, ocaml, quiet }
 ocamlfind ocamlopt -c -package str -package unix -o Expression.cmx Expression.ml # cached
+# Target: SymbolTable.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:SymbolTable.cmx, file:SymbolTable.ml, implem, native, ocaml, quiet }
+ocamlfind ocamlopt -c -package str -package unix -o SymbolTable.cmx SymbolTable.ml # cached
+# Target: Debug.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:Debug.cmx, file:Debug.ml, implem, native, ocaml, quiet }
+ocamlfind ocamlopt -c -package str -package unix -o Debug.cmx Debug.ml # cached
+# Target: ExprParser.ml.depends, tags: { package(str), package(unix), extension:ml, file:ExprParser.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -package str -package unix -modules ExprParser.ml > ExprParser.ml.depends # cached
 # Target: global.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:global.cmx, file:global.ml, implem, native, ocaml, quiet }
 ocamlfind ocamlopt -c -package str -package unix -o global.cmx global.ml # cached
 # Target: ExprParser.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:ExprParser.cmx, file:ExprParser.ml, implem, native, ocaml, quiet }
@@ -78,13 +124,60 @@ ocamlfind ocamlopt -c -package str -package unix -o parser.cmx parser.ml # cache
 ocamlfind ocamlopt -c -package str -package unix -o lexer.cmx lexer.ml # cached
 # Target: Parse.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:Parse.cmx, file:Parse.ml, implem, native, ocaml, quiet }
 ocamlfind ocamlopt -c -package str -package unix -o Parse.cmx Parse.ml # cached
+# Target: Circuit.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:Circuit.cmx, file:Circuit.ml, implem, native, ocaml, quiet }
+ocamlfind ocamlopt -c -package str -package unix -o Circuit.cmx Circuit.ml
++ ocamlfind ocamlopt -c -package str -package unix -o Circuit.cmx Circuit.ml
+File "Circuit.ml", lines 51-64, characters 4-69:
+51 | ....match e with
+52 |       True_gen   -> True
+53 |     | False_gen  -> False
+54 |     | Literal_gen(l)   -> convert_literal l
+55 |     | Not_gen(_)       -> print_endline (expression_to_str e) ; raise(ErrorInNNF)
+...
+61 |     | Equiv_gen(x,y)   -> let (cx,cy)=(convert x, convert y) in Ite(get_name(),cx,cy,cy)
+62 |     | Equiv_path(x,y,z)-> let r=if compare_lists x y then True else False in let cz=convert z in And(get_name(),r,cz)
+63 |     | Forall_gen(x,y)  -> let cy=convert y in Forall(get_name(),x,cy)
+64 |     | Exists_gen(x,y)  -> let cy=convert y in Exists(get_name(),x,cy)
+Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+General _
+
+File "Circuit.ml", line 103, characters 6-16:
+103 |     | And(t,x,y)    -> addtag t ; tag_c x ; tag_c y
+            ^^^^^^^^^^
+Warning 11 [redundant-case]: this match case is unused.
+
+File "Circuit.ml", lines 149-173, characters 4-94:
+149 | ....match c with
+150 |       True  -> "and()\n"
+151 |     | False -> "or()\n"
+152 |     | Literal(s,_) -> ""
+153 |     | Let(s,cx,cy) -> sprintf "%s\n%s" (to_str cx) (to_str cy)
+...
+170 |       sx ^ sy ^ sprintf "%s = xor(%s,%s)\n" s (get_name cx) (get_name cy)
+171 |     | Ite(s,cx,cy,cz)  ->
+172 |       let (sx,sy,sz)=(to_str cx,to_str cy,to_str cz) in
+173 |       sx ^ sy ^ sz ^ sprintf "%s = ite(%s,%s,%s)\n" s (get_name cx) (get_name cy)(get_name cz)
+Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(Exists (_, _, _)|Forall (_, _, _))
 # Target: genqbf.cmx, tags: { package(str), package(unix), compile, extension:cmx, extension:ml, file:genqbf.cmx, file:genqbf.ml, implem, native, ocaml, quiet }
 ocamlfind ocamlopt -c -package str -package unix -o genqbf.cmx genqbf.ml
 + ocamlfind ocamlopt -c -package str -package unix -o genqbf.cmx genqbf.ml
-File "genqbf.ml", line 169, characters 8-12:
-169 |     let desc = parse_problem_desc () in
-              ^^^^
-Warning 26 [unused-var]: unused variable desc.
+File "genqbf.ml", lines 214-252, characters 5-78:
+214 | .....match rest with
+215 |        Form.Exists(x,y) ->
+216 |          let udesc = generate_unrolled_desc desc k x in
+217 |          let vartrans = get_vars udesc.trans in
+218 |          let path_i = take_first_i_elements i vartrans in
+...
+249 |      | Form.Or(x,y) -> Or_gen(encode x i k epsilon,encode y i k epsilon)
+250 |      | Form.And(x,y) -> And_gen(encode x i k epsilon,encode y i k epsilon)
+251 |      | Form.Impl(x,y) -> Impl_gen(encode x i k epsilon,encode y i k epsilon)
+252 |      | Form.Equiv(x,y) -> Equiv_gen(encode x i k epsilon,encode y i k epsilon)
+Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(True|False|Literal _)
 # Target: genqbf.native, tags: { package(str), package(unix), dont_link_with, extension:native, file:genqbf.native, link, native, ocaml, program, quiet }
-ocamlfind ocamlopt -linkpkg -package str -package unix Expression.cmx global.cmx ExprParser.cmx ExprLexer.cmx Parse.cmx formula.cmx genArgs.cmx parser.cmx lexer.cmx genqbf.cmx -o genqbf.native
+ocamlfind ocamlopt -linkpkg -package str -package unix Expression.cmx SymbolTable.cmx Circuit.cmx Debug.cmx global.cmx ExprParser.cmx ExprLexer.cmx Parse.cmx formula.cmx genArgs.cmx parser.cmx lexer.cmx genqbf.cmx -o genqbf.native
 # Compilation successful.

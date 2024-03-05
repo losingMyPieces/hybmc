@@ -1,5 +1,5 @@
 
-** Conflict (shift/reduce) in state 58.
+** Conflict (shift/reduce) in state 77.
 ** Token involved: EOF
 ** This state is reached from main after reading:
 
@@ -11,22 +11,22 @@ NOT formula_expr
 main 
 (?)
 
-** In state 58, looking ahead at EOF, reducing production
+** In state 77, looking ahead at EOF, reducing production
 ** formula_expr -> NOT formula_expr
 ** is permitted because of the following sub-derivation:
 
 formula_expr EOF // lookahead token appears
 NOT formula_expr . 
 
-** In state 58, looking ahead at EOF, shifting is permitted
+** In state 77, looking ahead at EOF, shifting is permitted
 ** because of the following sub-derivation:
 
 NOT main 
     formula_expr . EOF 
 
-** Conflict (shift/reduce) in state 56.
-** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
-** The following explanations concentrate on token UNTIL.
+** Conflict (shift/reduce) in state 75.
+** Tokens involved: OR IMPL EQUIV AND
+** The following explanations concentrate on token OR.
 ** This state is reached from main after reading:
 
 EXISTS ID formula_expr
@@ -37,23 +37,23 @@ EXISTS ID formula_expr
 main 
 (?)
 
-** In state 56, looking ahead at UNTIL, shifting is permitted
+** In state 75, looking ahead at OR, shifting is permitted
 ** because of the following sub-derivation:
 
 EXISTS ID formula_expr 
-          formula_expr . UNTIL formula_expr 
+          formula_expr . OR formula_expr 
 
-** In state 56, looking ahead at UNTIL, reducing production
+** In state 75, looking ahead at OR, reducing production
 ** formula_expr -> EXISTS ID formula_expr
 ** is permitted because of the following sub-derivation:
 
 formula_expr EOF 
-formula_expr UNTIL formula_expr // lookahead token appears
+formula_expr OR formula_expr // lookahead token appears
 EXISTS ID formula_expr . 
 
-** Conflict (shift/reduce) in state 53.
-** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
-** The following explanations concentrate on token UNTIL.
+** Conflict (shift/reduce) in state 72.
+** Tokens involved: OR IMPL EQUIV AND
+** The following explanations concentrate on token OR.
 ** This state is reached from main after reading:
 
 FORALL ID formula_expr
@@ -64,21 +64,21 @@ FORALL ID formula_expr
 main 
 (?)
 
-** In state 53, looking ahead at UNTIL, shifting is permitted
+** In state 72, looking ahead at OR, shifting is permitted
 ** because of the following sub-derivation:
 
 FORALL ID formula_expr 
-          formula_expr . UNTIL formula_expr 
+          formula_expr . OR formula_expr 
 
-** In state 53, looking ahead at UNTIL, reducing production
+** In state 72, looking ahead at OR, reducing production
 ** formula_expr -> FORALL ID formula_expr
 ** is permitted because of the following sub-derivation:
 
 formula_expr EOF 
-formula_expr UNTIL formula_expr // lookahead token appears
+formula_expr OR formula_expr // lookahead token appears
 FORALL ID formula_expr . 
 
-** Conflict (shift/reduce) in state 43.
+** Conflict (shift/reduce) in state 62.
 ** Token involved: EOF
 ** This state is reached from main after reading:
 
@@ -91,22 +91,22 @@ main
 OP main CL 
    (?)
 
-** In state 43, looking ahead at EOF, reducing production
+** In state 62, looking ahead at EOF, reducing production
 ** formula_expr -> NOT formula_expr
 ** is permitted because of the following sub-derivation:
 
 formula_expr EOF // lookahead token appears
 NOT formula_expr . 
 
-** In state 43, looking ahead at EOF, shifting is permitted
+** In state 62, looking ahead at EOF, shifting is permitted
 ** because of the following sub-derivation:
 
 NOT main 
     formula_expr . EOF 
 
-** Conflict (shift/reduce) in state 41.
-** Tokens involved: UNTIL RELEASE OR IMPL EQUIV CL AND
-** The following explanations concentrate on token UNTIL.
+** Conflict (shift/reduce) in state 60.
+** Tokens involved: OR IMPL EQUIV CL AND
+** The following explanations concentrate on token OR.
 ** This state is reached from main after reading:
 
 OP EXISTS ID formula_expr
@@ -118,23 +118,23 @@ main
 OP main CL 
    (?)
 
-** In state 41, looking ahead at UNTIL, shifting is permitted
+** In state 60, looking ahead at OR, shifting is permitted
 ** because of the following sub-derivation:
 
 EXISTS ID formula_expr 
-          formula_expr . UNTIL formula_expr 
+          formula_expr . OR formula_expr 
 
-** In state 41, looking ahead at UNTIL, reducing production
+** In state 60, looking ahead at OR, reducing production
 ** formula_expr -> EXISTS ID formula_expr
 ** is permitted because of the following sub-derivation:
 
 formula_expr EOF 
-formula_expr UNTIL formula_expr // lookahead token appears
+formula_expr OR formula_expr // lookahead token appears
 EXISTS ID formula_expr . 
 
-** Conflict (shift/reduce) in state 38.
-** Tokens involved: UNTIL RELEASE OR IMPL EQUIV CL AND
-** The following explanations concentrate on token UNTIL.
+** Conflict (shift/reduce) in state 57.
+** Tokens involved: OR IMPL EQUIV CL AND
+** The following explanations concentrate on token OR.
 ** This state is reached from main after reading:
 
 OP FORALL ID formula_expr
@@ -146,23 +146,23 @@ main
 OP main CL 
    (?)
 
-** In state 38, looking ahead at UNTIL, shifting is permitted
+** In state 57, looking ahead at OR, shifting is permitted
 ** because of the following sub-derivation:
 
 FORALL ID formula_expr 
-          formula_expr . UNTIL formula_expr 
+          formula_expr . OR formula_expr 
 
-** In state 38, looking ahead at UNTIL, reducing production
+** In state 57, looking ahead at OR, reducing production
 ** formula_expr -> FORALL ID formula_expr
 ** is permitted because of the following sub-derivation:
 
 formula_expr EOF 
-formula_expr UNTIL formula_expr // lookahead token appears
+formula_expr OR formula_expr // lookahead token appears
 FORALL ID formula_expr . 
 
-** Conflict (shift/reduce) in state 30.
-** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
-** The following explanations concentrate on token UNTIL.
+** Conflict (shift/reduce) in state 48.
+** Tokens involved: OR IMPL EQUIV AND
+** The following explanations concentrate on token OR.
 ** This state is reached from main after reading:
 
 NEXT FORALL ID formula_expr
@@ -172,25 +172,26 @@ NEXT FORALL ID formula_expr
 
 main 
 formula_expr EOF 
-NEXT formula_expr 
-     (?)
+(?)
 
-** In state 30, looking ahead at UNTIL, shifting is permitted
+** In state 48, looking ahead at OR, shifting is permitted
 ** because of the following sub-derivation:
 
-FORALL ID formula_expr 
-          formula_expr . UNTIL formula_expr 
+NEXT formula_expr 
+     FORALL ID formula_expr 
+               formula_expr . OR formula_expr 
 
-** In state 30, looking ahead at UNTIL, reducing production
+** In state 48, looking ahead at OR, reducing production
 ** formula_expr -> FORALL ID formula_expr
 ** is permitted because of the following sub-derivation:
 
-formula_expr UNTIL formula_expr // lookahead token appears
-FORALL ID formula_expr . 
+formula_expr OR formula_expr // lookahead token appears
+NEXT formula_expr // lookahead token is inherited
+     FORALL ID formula_expr . 
 
-** Conflict (shift/reduce) in state 17.
-** Tokens involved: UNTIL RELEASE OR IMPL EQUIV AND
-** The following explanations concentrate on token UNTIL.
+** Conflict (shift/reduce) in state 34.
+** Tokens involved: OR IMPL EQUIV AND
+** The following explanations concentrate on token OR.
 ** This state is reached from main after reading:
 
 NEXT EXISTS ID formula_expr
@@ -200,18 +201,106 @@ NEXT EXISTS ID formula_expr
 
 main 
 formula_expr EOF 
-NEXT formula_expr 
-     (?)
+(?)
 
-** In state 17, looking ahead at UNTIL, shifting is permitted
+** In state 34, looking ahead at OR, shifting is permitted
 ** because of the following sub-derivation:
 
-EXISTS ID formula_expr 
-          formula_expr . UNTIL formula_expr 
+NEXT formula_expr 
+     EXISTS ID formula_expr 
+               formula_expr . OR formula_expr 
 
-** In state 17, looking ahead at UNTIL, reducing production
+** In state 34, looking ahead at OR, reducing production
 ** formula_expr -> EXISTS ID formula_expr
 ** is permitted because of the following sub-derivation:
 
-formula_expr UNTIL formula_expr // lookahead token appears
-EXISTS ID formula_expr . 
+formula_expr OR formula_expr // lookahead token appears
+NEXT formula_expr // lookahead token is inherited
+     EXISTS ID formula_expr . 
+
+** Conflict (reduce/reduce) in state 29.
+** Tokens involved: OR IMPL EQUIV CL AND
+** The following explanations concentrate on token OR.
+** This state is reached from main after reading:
+
+FALSE
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+formula_expr EOF 
+(?)
+
+** In state 29, looking ahead at OR, reducing production
+** expression -> FALSE
+** is permitted because of the following sub-derivation:
+
+expression UNTIL expression 
+expression OR expression // lookahead token appears
+FALSE . 
+
+** In state 29, looking ahead at OR, reducing production
+** formula_expr -> FALSE
+** is permitted because of the following sub-derivation:
+
+formula_expr OR formula_expr // lookahead token appears
+FALSE . 
+
+** Conflict (reduce/reduce) in state 8.
+** Tokens involved: OR IMPL EQUIV CL AND
+** The following explanations concentrate on token OR.
+** This state is reached from main after reading:
+
+ID
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+formula_expr EOF 
+(?)
+
+** In state 8, looking ahead at OR, reducing production
+** expression -> ID
+** is permitted because of the following sub-derivation:
+
+expression UNTIL expression 
+expression OR expression // lookahead token appears
+ID . 
+
+** In state 8, looking ahead at OR, reducing production
+** formula_expr -> ID
+** is permitted because of the following sub-derivation:
+
+formula_expr OR formula_expr // lookahead token appears
+ID . 
+
+** Conflict (reduce/reduce) in state 1.
+** Tokens involved: OR IMPL EQUIV CL AND
+** The following explanations concentrate on token OR.
+** This state is reached from main after reading:
+
+TRUE
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+formula_expr EOF 
+(?)
+
+** In state 1, looking ahead at OR, reducing production
+** expression -> TRUE
+** is permitted because of the following sub-derivation:
+
+expression UNTIL expression 
+expression OR expression // lookahead token appears
+TRUE . 
+
+** In state 1, looking ahead at OR, reducing production
+** formula_expr -> TRUE
+** is permitted because of the following sub-derivation:
+
+formula_expr OR formula_expr // lookahead token appears
+TRUE . 

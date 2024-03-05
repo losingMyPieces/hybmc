@@ -158,7 +158,7 @@ echo "-------------------------------------------------------------- \n\n"
 echo "\n============ Unrolling with genQBF + Solving with QuAbS ============"
  echo "---Generating QCIR---"
 echo "generating QBF BMC..."
- ${GENQBF} -I ${I} -R ${R} -Q ${P} -k ${k} -sem ${SEM}
+ ${GENQBF} -I ${I} -R ${R} -Q ${P} -k ${k} -sem ${SEM} -f qcir -o ${QCIR_OUT} -n
 #-f qcir -o ${QCIR_OUT} -n --fast
  # echo "---QUABS solving---"
 echo "solving QBF..."

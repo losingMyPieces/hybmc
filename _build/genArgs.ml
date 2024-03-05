@@ -121,7 +121,7 @@ let opts =
     ("-a", Arg.Unit   doanonymous, "do not append \"_A\" and \"_B\" for systems A and B");
     ("-I", Arg.String set_initial_file_A, "input file for initial state for A");
     ("-R", Arg.String set_transition_file_A, "input file for transition relation for A");
-    ("-Q", Arg.String set_hyperctl_file, "hyperctl file");
+    ("-Q", Arg.String set_hyperctl_file, "hyperctl* file");
     ("-sem", Arg.Symbol (unrolling_semantics_list,set_unrolling_semantics), "semantics of the unrolling:(optimistic/pessimistic)");
     ("-k", Arg.Int set_unroll_num, "integer depth of the unrolling");
     ("-n", Arg.Unit tonum, "transform variable ids to numeric");
