@@ -35,16 +35,21 @@ We now provide a demo example. To run, execute the followings:
 [BAKERY]
 
 -- 1.1 BAKERY 3PROC SYM1 --
+
   ./parser.sh cases/bakery_3procs.smv cases/bakery_formula_sym1_3proc.hq 10 pes
   
 -- 1.2 BAKERY 3PROC SYM2 --
+
   ./parser.sh cases/bakery_3procs.smv cases/bakery_formula_sym2_3proc.hq 10 pes
   
 -- 1.3 BAKERY 5PROC SYM1 --
+
   ./parser.sh cases/bakery_5procs.smv cases/bakery_formula_sym1_5proc.hq 10 pes
   
 -- 1.4 BAKERY 5PROC SYM2 --
+
   ./parser.sh cases/bakery_5procs.smv cases/bakery_formula_sym2_5proc.hq 10 pes
 
 [Mutation Testing]
+
   ./parser.sh cases/mutation_testing.smv cases/mutation_testing.hq 10 pes -find
