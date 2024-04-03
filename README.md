@@ -29,6 +29,7 @@ We now provide a demo example. To run, execute the followings:
 
 
 [BAKERY]
+
 -- 1.1 BAKERY 3PROC SYM1 --
   ./parser.sh cases/bakery_3procs.smv cases/bakery_formula_sym1_3proc.hq 10 pes
   
