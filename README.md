@@ -5,6 +5,7 @@ Python3.6 && pynusmv
 
 hybmc is a home-grown tool of Bounded Model Checking for Hyperproperties.
 It includes several parts:
+
 	1) NuSMV model parsing and Boolean encoding of transition relation and specification;
  
 	2) HyperCTL* formula translation;
