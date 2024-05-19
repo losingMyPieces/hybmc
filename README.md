@@ -79,3 +79,11 @@ We now provide a demo example. To run, execute the followings:
 
   ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 368 pes
 
+3-Threadincorrect	\phi ni	pes	368	5	0.664	0.163	0.045	0.872	0.512	0.749	0.261	1.522	SAT
+3-Threadincorrect	\phi ni	pes	368	50	0.523	1.336	0.056	1.915	0.469	7.47	3.861	11.8	SAT
+3-Threadincorrect	\phi ni	pes	368	150	0.475	3.031	0.102	3.608	0.497	25.484	16.681	42.662	SAT
+3-Threadincorrect	\phi ni	pes	368	260	0.507	5.648	0.19	6.345	0.461	46.025	41.627	88.113	SAT
+3-Threadincorrect	\phi ni	pes	368	368	0.482	7.519	0.344	8.345	0.5	66.878	71.528	138.906	SAT
+![image](https://github.com/losingMyPieces/hybmc/assets/48757622/b0084c3f-58f3-44c2-b86c-da0874f04d6f)
+
+
