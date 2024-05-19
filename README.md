@@ -49,7 +49,30 @@ We now provide a demo example. To run, execute the followings:
 -- 1.4 BAKERY 5PROC SYM2 --
 
   ./parser.sh cases/bakery_5procs.smv cases/bakery_formula_sym2_5proc.hq 10 pes
+  
 
 [Mutation Testing]
 
   ./parser.sh cases/mutation_testing.smv cases/mutation_testing.hq 10 pes -find
+
+
+[3-thread]
+-- 3.1 3-thread incorrect --
+  ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 50 pes
+  
+-- 3.2 3-thread correct --
+  ./parser.sh cases/NI_correct.smv cases/NI_formula.hq 50 opt
+
+[并发程序无干扰性实验]
+-- 4.1 3-thread incorrect NI_formula k=5、50、150、260、368 --
+
+  ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 5 pes
+  
+  ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 50 pes
+  
+  ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 150 pes
+
+  ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 260 pes
+
+  ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 368 pes
+
