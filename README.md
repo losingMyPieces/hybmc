@@ -17,7 +17,7 @@ It includes several parts:
 QuAbs(https://github.com/ltentrup/quabs), is under AGPL license. (please see LICENSE.txt)  
 
 ## HOW TO USE
-To run hybmc, execute ```parser.sh``` with one the following scenario:
+To run hybmc, execute ```parser.sh``` with the following scenario:
 
 ```sudo ./parser.sh <model_file_name.smv> <formula_file_name.hq> <k> ```
 
