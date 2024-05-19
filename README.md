@@ -57,13 +57,16 @@ We now provide a demo example. To run, execute the followings:
 
 
 [3-thread]
+
 -- 3.1 3-thread incorrect --
   ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 50 pes
   
 -- 3.2 3-thread correct --
   ./parser.sh cases/NI_correct.smv cases/NI_formula.hq 50 opt
 
+
 [并发程序无干扰性实验]
+
 -- 4.1 3-thread incorrect NI_formula k=5、50、150、260、368 --
 
   ./parser.sh cases/NI_incorrect.smv cases/NI_formula.hq 5 pes
